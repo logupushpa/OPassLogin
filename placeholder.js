@@ -4,6 +4,12 @@
  * @url     http://uniquemethod.com/
  * @author  Unique Method
  */
+ 
+ function displayDate()
+{
+alert("Hello! I am an alert box!");
+}
+
 $(function()
 {
     // check placeholder browser support
