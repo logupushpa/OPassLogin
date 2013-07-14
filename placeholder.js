@@ -7,7 +7,15 @@
  
  function displayDate()
 {
-alert("Hello! I am an alert box!");
+if (document.getElementById("username").value==="" )
+{
+    document.getElementById("login_msg").innerHTML="Please Enter User Name"
+}
+else
+{
+    document.getElementById("login_msg").innerHTML=""
+}
+
 }
 
 $(function()
