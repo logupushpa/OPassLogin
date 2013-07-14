@@ -5,62 +5,41 @@
  * @author  Unique Method
  */
  
- function displayDate()
+var xmlhttp;
+ 
+function displayDate()
 {
+/*
 if (document.getElementById("username").value==="" )
 {
     document.getElementById("login_msg").innerHTML="Please Enter User Name"
 }
 else
+* */
 {
-    document.getElementById("login_msg").innerHTML=""
+	
+	xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+	xmlhttp.open("POST", "login.php");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send(JSON.stringify({username:"John Rambo"}));
+	xmlhttp.onreadystatechange  = receivedRandom;
+	
+
+    //document.getElementById("login_msg").innerHTML=""
 }
 
 }
 
-$(function()
-{
-    // check placeholder browser support
-    if (!Modernizr.input.placeholder)
-    {
- 
-        // set placeholder values
-        $(this).find('[placeholder]').each(function()
-        {
-            if ($(this).val() == '') // if field is empty
-            {
-                $(this).val( $(this).attr('placeholder') );
-            }
-        });
- 
-        // focus and blur of placeholders
-        $('[placeholder]').focus(function()
-        {
-            if ($(this).val() == $(this).attr('placeholder'))
-            {
-                $(this).val('');
-                $(this).removeClass('placeholder');
-            }
-        }).blur(function()
-        {
-            if ($(this).val() == '' || $(this).val() == $(this).attr('placeholder'))
-            {
-                $(this).val($(this).attr('placeholder'));
-                $(this).addClass('placeholder');
-            }
-        });
- 
-        // remove placeholders on submit
-        $('[placeholder]').closest('form').submit(function()
-        {
-            $(this).find('[placeholder]').each(function()
-            {
-                if ($(this).val() == $(this).attr('placeholder'))
-                {
-                    $(this).val('');
-                }
-            })
-        });
- 
-    }
-});
+function receivedRandom() {
+	
+	if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+	{
+		//var json = eval('('+ xmlhttp.responseText +')');
+		var username = document.getElementById("username");
+		username.value = xmlhttp.responseText;
+		//username.innerText = "Hello";
+		//username.outerText = "Outer text";
+	}
+	
+	
+}
